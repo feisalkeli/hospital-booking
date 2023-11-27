@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import supabase from "./config/supabaseclient";
+import Header from "./components/Header";
 
+import Footer from "./components/Footer";
+/**
+ *
+ * @returns Page layout
+ */
 function App() {
   const [doctors, setDoctors] = useState([]);
   const [patients, setPatients] = useState([]);
@@ -25,7 +31,11 @@ function App() {
   }, []);
   return (
     <>
-      <div></div>
+      <div>
+        <Header />
+
+        <Footer />
+      </div>
     </>
   );
 }
