@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import supabase from "./config/supabaseclient";
 import Header from "./components/Header";
+import Login from "./pages/Login";
+import Hero from "./pages/Hero";
+import HomePageLayout from "./pages/HomePage/HomePageLayout";
 
 import Footer from "./components/Footer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import OurServices from "./pages/OurServices";
 /**
  *
  * @returns Page layout
@@ -33,6 +38,15 @@ function App() {
     <>
       <div>
         <Header />
+        <Router>
+          <Routes>
+            {/* <Route path="/" element={<Hero />} /> */}
+
+            <Route path="/" element={<HomePageLayout />} />
+
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </Router>
 
         <Footer />
       </div>
