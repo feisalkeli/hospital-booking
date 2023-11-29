@@ -1,24 +1,40 @@
 import React, { useState } from "react";
 import supabase from "../config/supabaseclient";
-
+import background from "../assets/img/shape-01.png";
+import { useNavigate } from "react-router-dom";
+import {
+  Card,
+  Input,
+  Checkbox,
+  Button,
+  Typography,
+} from "@material-tailwind/react";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
+
   const authenticateUser = async () => {
     try {
-      const { user, error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email: email,
         password: password,
       });
 
       if (error) {
         setError(error.message);
+        console.log(error, "login error");
       }
 
-      if (user) {
+      const { user } = data;
+      if (user.role === "authenticated") {
         console.log("Login successful");
+        console.log(data);
+        alert(user.email, "Your was account created succesfully");
+        navigate("/");
+
         // You can redirect the user to another page upon successful login
       }
     } catch (error) {
@@ -38,39 +54,62 @@ const Login = () => {
     authenticateUser();
   };
 
+  const styles = {
+    backgroundImage: background,
+  };
+
   return (
-    <section className="w-full h-screen flex items-center justify-center">
-      <div className="shadow-xl p-8 bg-white rounded-md">
-        <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-          <label htmlFor="email">
-            Email
-            <input
-              required
-              type="email"
+    <section
+      className=" overflow-hidden mt-10 p-[180px] flex justify-center"
+      style={{ background: `url(${background})` }}
+    >
+      <Card color="transparent" shadow={false}>
+        <Typography variant="h4" color="blue-gray">
+          Log In
+        </Typography>
+        <Typography color="gray" className="mt-1 font-normal">
+          Nice to meet you! Enter your details to login.
+        </Typography>
+        <form
+          className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+          onSubmit={handleSubmit}
+        >
+          <div className="mb-1 flex flex-col gap-6">
+            <Typography variant="h6" color="blue-gray" className="-mb-3">
+              Your Email
+            </Typography>
+            <Input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="border p-2"
+              size="lg"
+              placeholder="name@mail.com"
+              className="border-white focus:border-[#1d4ed8]"
+              labelProps={{
+                className: "before:content-none after:content-none",
+              }}
             />
-          </label>
-          <label htmlFor="password">
-            Password
-            <input
-              required
-              type="password"
+            <Typography variant="h6" color="blue-gray" className="-mb-3">
+              Password
+            </Typography>
+            <Input
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="border p-2"
+              type="password"
+              size="lg"
+              placeholder="********"
+              className=" border border-grey focus:border-[#1d4ed8]"
+              labelProps={{
+                className: "before:content-none after:content-none",
+              }}
             />
-          </label>
-          <button
-            type="submit"
-            className="bg-blue-500 text-white p-2 rounded-md"
-          >
-            Login
-          </button>
+          </div>
+
+          <Button className="mt-6 bg-[#1d4ed8]" fullWidth type="submit">
+            Log In
+          </Button>
         </form>
-      </div>
-      {error && <p className="text-red-500 mt-4">{error}</p>}
+      </Card>
+      {error && <p>Fill in the fields</p>}
     </section>
   );
 };

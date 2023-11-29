@@ -19,9 +19,9 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full fixed z-10 right-0 items-center">
+    <header className="w-full fixed z-10  items-center">
       <div className="flex flex-1 justify-end mt-4 p-12">
-        <div className="flex hidden md:block " data-aos="fade-up">
+        <div className="flex hidden md:block " data-aos="fade-left">
           <ul className="flex gap-6">
             <li className="text-black  flex justify-end">
               <a href="/">Home</a>
@@ -33,7 +33,7 @@ const Header = () => {
               <a href="/">Book</a>
             </li>
             <li>
-              <a href="">
+              <a href="/signup">
                 <button>Signup</button>
               </a>
             </li>
@@ -79,7 +79,7 @@ const Header = () => {
                   <a href="/">Book</a>
                 </li>
                 <li>
-                  <a href="">
+                  <a href="/signup">
                     <button>Signup</button>
                   </a>
                 </li>

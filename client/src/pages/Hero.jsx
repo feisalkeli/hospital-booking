@@ -5,7 +5,7 @@ import Button from "../components/Button";
 const Hero = () => {
   return (
     <section className=" ">
-      <div className="w-full relative  bg-cover bg-no-repeat md:bg-contain bg-opacity-65 brightness-75 ">
+      <div className="w-full   bg-cover bg-no-repeat md:bg-contain bg-opacity-65 brightness-75 ">
         <img src={backgroundImage} alt="" className="object-contain w-full " />
 
         {/* Hero Card */}
@@ -21,7 +21,7 @@ const Hero = () => {
             </p>
             {/*  */}
             <div className="mt-3 items-center">
-              <Button title="Book Now" />
+              <Button title="Check Availability" />
             </div>
           </div>
           {/* Hero Image */}

@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Login from "./pages/Login";
 import Hero from "./pages/Hero";
 import HomePageLayout from "./pages/HomePage/HomePageLayout";
-
+import SignUp from "./pages/SignUp";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import OurServices from "./pages/OurServices";
@@ -45,6 +45,7 @@ function App() {
             <Route path="/" element={<HomePageLayout />} />
 
             <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
           </Routes>
         </Router>
 

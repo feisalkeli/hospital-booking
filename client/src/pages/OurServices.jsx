@@ -45,15 +45,18 @@ const services = [
 
 const OurServices = () => {
   return (
-    <section className="p-[40px] mt-[150px]">
-      <div className="items-center flex justify-center gap-9">
+    <section className="p-[40px] mt-[150px]  ">
+      <div
+        className="items-center flex justify-center gap-7"
+        data-aos="fade-left"
+      >
         <img src={servicesicon} alt="icon_servces" />
         <h1 className="text-black font-bold text-2xl">Our Services</h1>
       </div>
       {/* Cards */}
-      <div className=" grid grid-cols-1 md:grid-cols-3 justify-center gap-7 p-10 items-center ">
+      <div className=" grid grid-cols-1 md:grid-cols-3  justify-center gap-2 p-10 items-center w-full md:max-w-[1900px] ">
         {services.map((item, index) => (
-          <div key={index} className=" hover:shadow-xl  " data-aos="zoom-in-up">
+          <div key={index} className=" hover:shadow-xl  ">
             <ServiceCard item={item} />
           </div>
         ))}
