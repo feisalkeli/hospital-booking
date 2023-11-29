@@ -32,10 +32,7 @@ const Login = () => {
       if (user.role === "authenticated") {
         console.log("Login successful");
         console.log(data);
-        alert(user.email, "Your was account created succesfully");
-        navigate("/");
-
-        // You can redirect the user to another page upon successful login
+        navigate(`/patient/${user.id}`);
       }
     } catch (error) {
       console.error("Error during login:", error.message);
@@ -109,7 +106,7 @@ const Login = () => {
           </Button>
         </form>
       </Card>
-      {error && <p>Fill in the fields</p>}
+      {/* {error && <p>Fill in the fields</p>} */}
     </section>
   );
 };

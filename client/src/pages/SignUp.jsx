@@ -60,6 +60,8 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    handleUserAuth();
   };
   return (
     <section
@@ -74,14 +76,20 @@ const SignUp = () => {
           <Typography color="gray" className="mt-1 font-normal">
             Nice to meet you! Enter your details to register.
           </Typography>
-          <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+          <form
+            className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+            onSubmit={handleSubmit}
+          >
             <div className="mb-1 flex flex-col gap-6">
               <Typography variant="h6" color="blue-gray" className="-mb-3">
                 Your First Name
               </Typography>
               <Input
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
                 size="lg"
-                placeholder="name@mail.com"
+                placeholder="First_Name"
+                required
                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",
@@ -91,8 +99,11 @@ const SignUp = () => {
                 Your Last Name
               </Typography>
               <Input
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
                 size="lg"
-                placeholder="name@mail.com"
+                placeholder="Last_Name"
+                required
                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",
@@ -102,9 +113,12 @@ const SignUp = () => {
                 Your Email
               </Typography>
               <Input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 size="lg"
                 placeholder="name@mail.com"
                 type="email"
+                required
                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",
@@ -114,8 +128,11 @@ const SignUp = () => {
                 Gender
               </Typography>
               <Input
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
                 size="lg"
-                placeholder="name@mail.com"
+                placeholder="Gender"
+                required
                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",
@@ -125,9 +142,12 @@ const SignUp = () => {
                 Contact Number
               </Typography>
               <Input
+                value={contactNumber}
+                onChange={(e) => setContactNumber(e.target.value)}
                 type="number"
                 size="lg"
                 placeholder="0700 000 000"
+                required
                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",
@@ -137,9 +157,12 @@ const SignUp = () => {
                 Password
               </Typography>
               <Input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 size="lg"
                 placeholder="********"
+                required
                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",
@@ -147,13 +170,13 @@ const SignUp = () => {
               />
             </div>
 
-            <Button className="mt-6 bg-blue-600" fullWidth>
+            <Button className="mt-6 bg-blue-600" fullWidth type="submit">
               sign up
             </Button>
             <Typography color="gray" className="mt-4 text-center font-normal">
               Already have an account?{" "}
               <a href="/login" className="font-medium text-gray-900">
-                Sign In
+                Log In
               </a>
             </Typography>
           </form>

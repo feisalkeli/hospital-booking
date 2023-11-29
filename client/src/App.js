@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import supabase from "./config/supabaseclient";
 import Header from "./components/Header";
 import Login from "./pages/Login";
-import Hero from "./pages/Hero";
+import Patient from "./pages/Patient";
 import HomePageLayout from "./pages/HomePage/HomePageLayout";
 import SignUp from "./pages/SignUp";
 import Footer from "./components/Footer";
@@ -46,6 +46,7 @@ function App() {
 
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="patient/:patientId" element={<Patient />} />
           </Routes>
         </Router>
 
