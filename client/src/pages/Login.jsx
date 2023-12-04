@@ -9,14 +9,23 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
+/**
+ *
+ * @returns Login component
+ * performs validations by authentication using supabase auth
+ * if user is true navigates them to patient component
+ *
+ * material tailwind is used to output the login form
+ */
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(""); //sets state of the email
+  const [password, setPassword] = useState(""); //sets state of password
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
-
+  ///function that handles authentication
   const authenticateUser = async () => {
+    ///fetch from supabase auth
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email: email,
@@ -25,20 +34,19 @@ const Login = () => {
 
       if (error) {
         setError(error.message);
-        console.log(error, "login error");
+        console.log(error);
       }
 
-      const { user } = data;
-      if (user.role === "authenticated") {
-        console.log("Login successful");
-        console.log(data);
+      const { user } = data; ///destruct the dataobj from supabase
+      //handle if user is authenticated
+      if (user) {
         navigate(`/patient/${user.id}`);
       }
     } catch (error) {
       console.error("Error during login:", error.message);
     }
   };
-
+  ///function that handles form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 

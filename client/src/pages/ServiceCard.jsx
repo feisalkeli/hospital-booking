@@ -1,5 +1,10 @@
 import React from "react";
-
+/**
+ *outputs the contents of the service card contents ie image and details
+ *
+ * @param {*} { item }
+ * @return {*}
+ */
 const ServiceCard = ({ item }) => {
   return (
     <div className="flex-col md:flex-row  items-center">

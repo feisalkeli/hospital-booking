@@ -13,7 +13,7 @@ const WhyUs = () => {
       </div>
       <div className="flex md:flex-row-reverse justify-center items-center">
         <div className="">
-          <img src="" alt="choose us" />
+          <img alt="choose us" />
         </div>
         <div className="">text</div>
       </div>

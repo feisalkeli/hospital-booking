@@ -3,7 +3,7 @@ import supabase from "../config/supabaseclient";
 import { useParams } from "react-router-dom";
 /**
  *
- * @returns A single Patient Data ones the Patient is
+ * @returns A single Patient Data once the Patient is
  * Authenticated from the Login Page
  */
 const Patient = () => {
@@ -36,7 +36,7 @@ const Patient = () => {
       {/* map through patientdata */}
       {patientData &&
         patientData.map((patient, index) => (
-          <div key={index}>{patient.first_name}</div>
+          <div key={index}>{patient.firstName}</div>
         ))}
     </section>
   );

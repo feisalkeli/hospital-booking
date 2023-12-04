@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import supabase from "../config/supabaseclient";
 import background from "../assets/img/shape-02.png";
 import {
@@ -16,52 +17,88 @@ const SignUp = () => {
   const [gender, setGender] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [error, setError] = useState("");
+  const [signedUpUser, setSignedUpUser] = useState(null);
 
+  const navigate = useNavigate();
   // Authenticate the user first
 
   const handleUserAuth = async () => {
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
     });
 
     // handle error
+    console.log("Sign-Up User:", data);
+    console.log("Sign-Up Error:", error);
 
     if (error) {
       setError(error);
     }
-
+    if (data) {
+      console.log(data);
+    }
+    // Check if user exists in data
+    if (!data || !data.user) {
+      console.error("Authentication failed. User not found.");
+      return null;
+    }
     ///destructure the user from the data obj
-    const { user } = data;
 
     ///create a user entry in the db with other user parameters
-
-    const { data: dbData, error: dbError } = await supabase
-      .from("patients")
+    let { user } = data;
+    const {
+      user: dbData,
+      error: dbError,
+      text,
+    } = await supabase
+      .from("Patients")
       .upsert(
         [
           {
-            user_id: user.id,
+            id: user.id,
+            email: email,
             firstName: firstName,
             lastName: lastName,
             gender: gender,
             contactNumber: contactNumber,
           },
         ],
-        { onConflict: ["user_id"] }
-      );
-
+        { onConflict: ["id"] }
+      )
+      .select();
+    if (dbData) {
+      console.log("db data from user", dbData);
+    }
     if (dbError) {
       console.error("Error creating user entry in the database:", dbError);
       return null;
     }
-    return user; // Return the authenticated user
+    console.log(user, "created user");
+    setSignedUpUser(user); // Return the authenticated user
+    return user;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      // Call handleUserAuth to initiate the authentication process
+      const signedUpUser = await handleUserAuth();
+      console.log(signedUpUser);
 
-    handleUserAuth();
+      if (signedUpUser && signedUpUser.id) {
+        ///set signedUpUser.id to userId
+        const userId = signedUpUser.id;
+        console.log(userId);
+        //navigate to patient irrespective of the Id
+        navigate(`/patient/${userId}`);
+        console.log("userr signedup sucessfully", signedUpUser);
+      } else {
+        console.log(`failed to sign up user`);
+      }
+    } catch (error) {
+      console.log(error, "signup failed new");
+    }
   };
   return (
     <section
@@ -89,7 +126,6 @@ const SignUp = () => {
                 onChange={(e) => setFirstName(e.target.value)}
                 size="lg"
                 placeholder="First_Name"
-                required
                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",
@@ -103,7 +139,6 @@ const SignUp = () => {
                 onChange={(e) => setLastName(e.target.value)}
                 size="lg"
                 placeholder="Last_Name"
-                required
                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",
@@ -118,7 +153,6 @@ const SignUp = () => {
                 size="lg"
                 placeholder="name@mail.com"
                 type="email"
-                required
                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",
@@ -128,11 +162,10 @@ const SignUp = () => {
                 Gender
               </Typography>
               <Input
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
                 size="lg"
                 placeholder="Gender"
-                required
                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",
@@ -144,10 +177,9 @@ const SignUp = () => {
               <Input
                 value={contactNumber}
                 onChange={(e) => setContactNumber(e.target.value)}
-                type="number"
+                type="text"
                 size="lg"
                 placeholder="0700 000 000"
-                required
                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",
@@ -162,7 +194,6 @@ const SignUp = () => {
                 type="password"
                 size="lg"
                 placeholder="********"
-                required
                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",
