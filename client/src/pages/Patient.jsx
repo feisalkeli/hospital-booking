@@ -36,7 +36,10 @@ const Patient = () => {
       {/* map through patientdata */}
       {patientData &&
         patientData.map((patient, index) => (
-          <div key={index}>{patient.firstName}</div>
+          <div>
+            <div key={index}>{patient.firstName}</div>
+            <div key={index}>{patient.gender}</div>
+          </div>
         ))}
     </section>
   );

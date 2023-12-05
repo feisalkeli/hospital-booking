@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import supabase from "../config/supabaseclient";
 import background from "../assets/img/shape-02.png";

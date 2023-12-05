@@ -79,7 +79,7 @@ const Header = () => {
                   <a href="/">Book</a>
                 </li>
                 <li>
-                  <a href="/signup">
+                  <a href="">
                     <button>Signup</button>
                   </a>
                 </li>

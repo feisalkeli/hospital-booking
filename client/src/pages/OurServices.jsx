@@ -9,7 +9,7 @@ import service5 from "../assets/img/clinic/service-5.jpg";
 import service6 from "../assets/img/clinic/service-5.jpg";
 
 import ServiceCard from "./ServiceCard";
-
+import serviceBackground from "../assets/img/cloud-bg.png";
 const services = [
   {
     image: service1,
@@ -45,7 +45,16 @@ const services = [
 
 const OurServices = () => {
   return (
-    <section className="p-[40px] mt-[150px]  ">
+    <section
+      className="p-[40px] mt-[150px]  "
+      style={{
+        background: `url(${serviceBackground})`,
+        background: "cover",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundColor: "#dbeafe",
+      }}
+    >
       <div
         className="items-center flex justify-center gap-7"
         data-aos="fade-left"
