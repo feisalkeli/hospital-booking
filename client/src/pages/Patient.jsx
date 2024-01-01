@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import supabase from "../config/supabaseclient";
 import { useParams } from "react-router-dom";
+import PatientDash from "./PatientDash";
 /**
  *
  * @returns A single Patient Data once the Patient is
@@ -36,9 +37,8 @@ const Patient = () => {
       {/* map through patientdata */}
       {patientData &&
         patientData.map((patient, index) => (
-          <div>
-            <div key={index}>{patient.firstName}</div>
-            <div key={index}>{patient.gender}</div>
+          <div key={index}>
+            <PatientDash patient={patient} />
           </div>
         ))}
     </section>

@@ -21,7 +21,10 @@ const Hero = () => {
             </p>
             {/*  */}
             <div className="mt-3 items-center">
-              <Button title="Check Availability" />
+              <a href="booking">
+                {" "}
+                <Button title="Check Availability" />
+              </a>
             </div>
           </div>
           {/* Hero Image */}

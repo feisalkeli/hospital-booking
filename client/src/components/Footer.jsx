@@ -1,6 +1,8 @@
 import React from "react";
-
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
 const Footer = () => {
+  let location = useLocation();
   return (
     <footer
       className="mt-10 p-4  text-white overflow-hidden"
